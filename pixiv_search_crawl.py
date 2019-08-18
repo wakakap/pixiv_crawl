@@ -15,7 +15,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-# pyautogui
+# pyautogui，如果用这个似乎不能使用headless模式，注意。
 import pyautogui
 
 #################################################################################
@@ -63,7 +63,7 @@ def pixiv_search_imglist(driver,url,page):
         imgurl_list.append(str(imgurl))
     # 将收集到的数据写入文件
     f = open('pixiv_list.txt', 'a', encoding='utf-8')
-    f.write(+'\n'+'page: '+str(page)+'\n')
+    f.write('\n'+'page: '+str(page)+'\n')
     f.write('\n'.join(imgurl_list))
     f.close()
     time.sleep(5)
@@ -105,7 +105,6 @@ pixiv_cookielist = [{'domain': '.pixiv.net', 'expiry': 1566095147, 'httpOnly': F
 #这里的cookielist是手动登陆一次后获取的，之后就可以用cookie登录。
 for k in pixiv_cookielist:
     driver.add_cookie(k)
-driver.get("https://pixiv.net")
 
 ####要爬的pixiv搜索页面url除去最后page的数字####
 url = 'https://www.pixiv.net/search.php?word=尻神様%2010000users&order=date_d&p='
@@ -117,7 +116,7 @@ while 1:
     try:
         list = pixiv_search_imglist(driver,url,page)
     except Exception as e:
-        print("list error page= "+str(page))
+        print("error page: "+str(page))
         break
     i=0
     while i<len(list):
