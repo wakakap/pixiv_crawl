@@ -1,5 +1,5 @@
 # pixiv_crawl
-selenium+chromedriver
+selenium+chromedriver+pyautogui
 
 # 说明：
 
